@@ -25,4 +25,28 @@ class AdminController extends Controller
         $roles = Role::all();
         return view('admin.admin_addRoles',['roles' => $roles]);
     }
+
+    /**
+     * add roles and permissions
+     */
+    public function addRolesPost(Request $request){
+
+        /**
+         * valodate the incoming request data
+         */
+        $request->validate([
+            'role_id' => 'required',
+            'role_name' => 'required',
+        ]);
+
+        /**
+         * Create a new role instance and save it to the database
+         */
+        Role::create([
+            'role_id' => $request->role_id,
+            'role_name' => $request->role_name,
+        ]);
+
+        return redirect()->route('addRoles.get');
+    }
 }

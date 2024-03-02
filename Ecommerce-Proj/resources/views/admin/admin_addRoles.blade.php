@@ -11,7 +11,7 @@
     <div class="table">
         <div class="row">
             <div class="col-md-4">
-                <form action="#" method="POST">
+                <form action="{{route('addRolesPost.Post')}}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="role_id">Role ID:</label>
@@ -21,7 +21,7 @@
                         <label for="role_name">Role Name:</label>
                         <input type="text" class="form-control" id="role_name" name="role_name" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Role</button>
+                    <button type="submit" class="btn btn-primary font-weight-bolder">Add Role</button>
                 </form>
             </div>
             <div class="col-md-4">
@@ -60,6 +60,7 @@
                     <th>Role ID</th>
                     <th>Role Name</th>
                     <th>Permissions</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,6 +70,10 @@
                         <td>{{ $role->role_id }}</td>
                         <td>{{ $role->role_name }}</td>
                         <td>Create, Update, Delete, </td>
+                        <td>
+                            <button class="btn btn-primary mr-2"><a href="#" class="text-white text-decoration-none font-weight-bold">Update</a></button>
+                            <button class="btn btn-danger"><a href="#" class="text-white text-decoration-none font-weight-bold">Delete</a></button>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
