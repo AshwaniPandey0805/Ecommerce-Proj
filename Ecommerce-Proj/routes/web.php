@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\AdminController as WebAdminController;
 use App\Http\Controllers\web\AuthController;
+use App\Http\Controllers\web\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,11 @@ Route::any('/users', [WebAdminController::class, 'getUsers'])->name('getUsers.ge
 
 Route::get('/add-roles',  [WebAdminController::class, 'addRoles'])->name('addRoles.get');
 Route::any('/add-roles', [WebAdminController::class, 'addRolesPost'])->name('addRolesPost.Post');
+
+
+// Define routes for update and delete actions
+Route::get('/roles/{id}/update', 'RoleController@update')->name('updateRole');
+Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('deleteRole');
 
 
 // require __DIR__.'/auth.php';

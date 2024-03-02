@@ -71,8 +71,17 @@
                         <td>{{ $role->role_name }}</td>
                         <td>Create, Update, Delete, </td>
                         <td>
-                            <button class="btn btn-primary mr-2"><a href="#" class="text-white text-decoration-none font-weight-bold">Update</a></button>
-                            <button class="btn btn-danger"><a href="#" class="text-white text-decoration-none font-weight-bold">Delete</a></button>
+                            <!-- Update Button -->
+                            <form action="#" method="GET" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-primary mr-2">Update</button>
+                            </form>
+                            <!-- Delete Button -->
+                            <form action="{{ route('deleteRole', $role->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

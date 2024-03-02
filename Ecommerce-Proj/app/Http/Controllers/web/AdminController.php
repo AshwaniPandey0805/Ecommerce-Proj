@@ -47,6 +47,6 @@ class AdminController extends Controller
             'role_name' => $request->role_name,
         ]);
 
-        return redirect()->route('addRoles.get');
+        return redirect()->back()->with('success', 'Role deleted successfully');
     }
 }
