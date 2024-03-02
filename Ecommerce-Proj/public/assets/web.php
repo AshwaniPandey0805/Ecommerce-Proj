@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\web\AuthController;
+use App\Http\Controllers\ProfileManager;
+use Illuminate\Auth\AuthManager;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register',[AuthController::class,'getRegisterUser'])->name('getRegisterPage.get');
-Route::post('/register', [AuthController::class,'postRegisterUsers'])->name('postRegister.post');
 
-
-Route::get('/login', [AuthController::class, 'getLogin'])->name('login.get');
-
+Route::get('/register', [ProfileManager::class,'registerUserGet'])->name('registerPage.get');
 
 
 // require __DIR__.'/auth.php';
