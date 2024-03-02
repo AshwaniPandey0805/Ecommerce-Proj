@@ -32,9 +32,9 @@ class AuthController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'email' => 'required|email|unique:users,email',
-            'phone_number' => 'required|string',
-            'password' => 'required|string|min:6|confirmed', // 'password_confirmation' field must match 'password'
-            'password_confirmation' => 'required|string|min:6|confirmed',
+            'phone_number' => 'required',
+            'password' => 'required', // 'password_confirmation' field must match 'password'
+            'password_confirmation' => 'required',
         ]);
 
         $data['first_name'] = $request->first_name;
@@ -44,10 +44,12 @@ class AuthController extends Controller
         $data['password'] = Hash::make($request->password);
         $data['role_id'] = 104;
 
+        
+
         $password['password'] = $request->password;
         $password['cpassword'] = $request->password_confirmation;
         if($password['password'] ===  $password['cpassword']){
-
+            
            $users = User::create($data);
 
            /**
@@ -59,8 +61,6 @@ class AuthController extends Controller
 
         }
 
-        return back()->with(
-            "message" , 'Data stored'
-        );
+        return redirect(route('login.get'));
     }
 }
