@@ -21,7 +21,7 @@
                 <div class="p-3">
                     <div class="row align-items-center">
                         <div class="header-text rounded-5 mb-4  bg-secondary p-2">
-                            <h1 class="text-center text-white">Register User</h1>
+                            <h1 class="text-center text-white">Register Admin</h1>
                         </div>
                         <form method="POST" action="#">
                             @csrf
