@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Models\AssignPermission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,24 +30,33 @@ class AdminController extends Controller
     /**
      * add roles and permissions
      */
-    public function addRolesPost(Request $request){
-
-        /**
-         * valodate the incoming request data
-         */
+    public function addRolesPost(Request $request)
+    {
+        // Validate the incoming request data
         $request->validate([
-            'role_id' => 'required',
+            'role_id' => 'required|unique:roles',
             'role_name' => 'required',
+            'permissions' => 'array', // Ensure permissions is an array
         ]);
 
-        /**
-         * Create a new role instance and save it to the database
-         */
-        Role::create([
+        // Create a new role instance and save it to the database
+        $role = Role::create([
             'role_id' => $request->role_id,
             'role_name' => $request->role_name,
         ]);
 
-        return redirect()->back()->with('success', 'Role deleted successfully');
+        // Attach permissions to the role if checkboxes were selected
+        if ($request->has('permissions') && $role) {
+            $permissions = $request->permissions;
+            foreach ($permissions as $permission) {
+                AssignPermission::create([
+                    'role_id' => (int) $role-> role_id, 
+                    'permission_id' => (int) $permission, 
+                ]);
+            }
+        }
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Role added successfully');
     }
 }

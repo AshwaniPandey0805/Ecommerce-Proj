@@ -8,10 +8,10 @@
     <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 <div class="p-4" >
-    <div class="table">
+    <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <form action="{{route('addRolesPost.Post')}}" method="POST">
+                <form action="{{ route('addRolesPost.Post') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="role_id">Role ID:</label>
@@ -21,36 +21,33 @@
                         <label for="role_name">Role Name:</label>
                         <input type="text" class="form-control" id="role_name" name="role_name" required>
                     </div>
+                    <div class="form-group">
+                        <h4>Assign Permissions:</h4>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="create" name="permissions[]" value="1">
+                            <label class="form-check-label" for="create">Create</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="update" name="permissions[]" value="2">
+                            <label class="form-check-label" for="update">Update</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="delete" name="permissions[]" value="3">
+                            <label class="form-check-label" for="delete">Delete</label>
+                        </div>
+                        <!-- Add more checkboxes for Permissions -->
+                    </div>
                     <button type="submit" class="btn btn-primary font-weight-bolder">Add Role</button>
                 </form>
             </div>
             <div class="col-md-4">
-                <h4>Assign Permissions</h4>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="permission1" name="permissions[]" value="permission1">
-                    <label class="form-check-label" for="permission1">Create</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="permission2" name="permissions[]" value="permission2">
-                    <label class="form-check-label" for="permission2">Update</label>
-                </div>
-                <!-- Add more checkboxes for Permissions 1 -->
+                <!-- Other columns or content -->
             </div>
             <div class="col-md-4">
-                <p></p>
-                
-                <br>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="permission3" name="permissions[]" value="permission3">
-                    <label class="form-check-label" for="permission3">Delete</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="permission4" name="permissions[]" value="permission4">
-                    <label class="form-check-label" for="permission4">Permission4</label>
-                </div>
-                <!-- Add more checkboxes for Permissions 2 -->
+                <!-- Other columns or content -->
             </div>
         </div>
+    </div>
     </div>
     <div class="table-responsive mt-5">
         <table class="table table-striped table-bordered">
