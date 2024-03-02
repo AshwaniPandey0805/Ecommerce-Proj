@@ -3,7 +3,11 @@
 @section('title', 'Login Page')
 
 @section('content')
-    
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     {{-- main content --}}
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         {{-- login content --}}

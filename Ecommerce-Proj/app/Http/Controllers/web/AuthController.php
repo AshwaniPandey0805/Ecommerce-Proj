@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +29,9 @@ class AuthController extends Controller
       * Getting Admin Pannel view -> GET Method
       */
       public function getAdminPannel(){
-        return view('admin.adminPage');
+
+        $users = User::all();
+        return view('admin.adminPage',['users' => $users]);
       }
 
      /**
@@ -88,5 +91,15 @@ class AuthController extends Controller
         }else{
             return redirect()->route('login.get')->with('error', 'Invalid credentials.');
         }
+    }
+
+    /**
+     * logout method
+     */
+    public function logout(){
+        Auth::logout();
+        \Session::flush();
+
+        return redirect()->route('login.get')-> with('succcess', 'Logout Successfully');
     }
 }

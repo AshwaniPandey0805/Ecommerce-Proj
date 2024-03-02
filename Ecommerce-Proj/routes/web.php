@@ -27,6 +27,7 @@ Route::get('/login', [AuthController::class, 'getLogin'])->name('login.get');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
 
 Route::get('/admin-pannel', [AuthController::class,'getAdminPannel'])->name('getAdminPannel.get');
+Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // require __DIR__.'/auth.php';
