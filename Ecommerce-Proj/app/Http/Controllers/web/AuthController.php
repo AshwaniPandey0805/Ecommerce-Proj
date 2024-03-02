@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -22,6 +23,13 @@ class AuthController extends Controller
      public function getLogin(){
         return view('auth.loginPage');
      }
+
+     /**
+      * Getting Admin Pannel view -> GET Method
+      */
+      public function getAdminPannel(){
+        return view('admin.adminPage');
+      }
 
      /**
       * post register details -> POST method
@@ -62,5 +70,23 @@ class AuthController extends Controller
         }
 
         return redirect(route('login.get'));
+    }
+
+    /**
+     * login method -> POST Method
+     */
+    public  function postLogin(Request $request){
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email','password');
+
+        if(Auth::attempt($credentials)){
+            return redirect()->route('getAdminPannel.get')->with('success', 'login success');
+        }else{
+            return redirect()->route('login.get')->with('error', 'Invalid credentials.');
+        }
     }
 }

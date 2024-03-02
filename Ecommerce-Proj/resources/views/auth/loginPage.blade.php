@@ -3,6 +3,7 @@
 @section('title', 'Login Page')
 
 @section('content')
+    
     {{-- main content --}}
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         {{-- login content --}}
@@ -23,20 +24,24 @@
                         <div class="header-text rounded-5 mb-4  bg-secondary p-2">
                             <h1 class="text-center text-white">Login</h1>
                         </div>
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{route('login.post')}}">
                             @csrf
                             <div class="row mb-4">
                                 <div class="col-sm-12">
                                     <label for="email" class="form-label fs-4">Email</label>
                                     <input type="text" id="email" class="form-control form-control-lg bg-light fs-5" name="email" placeholder="Enter Email" required>
-                                    <small class="text-danger">Error message for Email field</small>
+                                    @if(session('error'))
+                                        <small class="alert alert-danger">{{session('error')}}</small>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <div class="col-sm-12">
                                     <label for="password" class="form-label fs-4">Password</label>
                                     <input type="password" id="password" class="form-control form-control-lg bg-light fs-5" name="password" placeholder="Enter Password" required>
-                                    <small class="text-danger">Error message for Password field</small>
+                                    @if(session('error'))
+                                    <small class="alert alert-danger">{{session('error')}}</small>
+                                @endif
                                 </div>
                             </div>
                             <!-- Additional fields can be added here -->
