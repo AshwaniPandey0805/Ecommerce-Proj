@@ -13,10 +13,10 @@
             <div class="col-md-4">
                 <form action="{{ route('addRolesPost.Post') }}" method="POST">
                     @csrf
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="role_id">Role ID:</label>
                         <input type="text" class="form-control" id="role_id" name="role_id" required>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="role_name">Role Name:</label>
                         <input type="text" class="form-control" id="role_name" name="role_name" required>
@@ -54,7 +54,6 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Role ID</th>
                     <th>Role Name</th>
                     <th>Permissions</th>
                     <th>Action</th>
@@ -64,7 +63,6 @@
                 @foreach ($roles as $role)
                     <tr>
                         <td>{{ $role->id }}</td>
-                        <td>{{ $role->role_id }}</td>
                         <td>{{ $role->role_name }}</td>
                         <td>Create, Update, Delete, </td>
                         <td>

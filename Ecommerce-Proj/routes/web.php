@@ -18,15 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/register',[AuthController::class,'getRegisterUser'])->name('getRegisterPage.get');
 Route::post('/register', [AuthController::class,'postRegisterUsers'])->name('postRegister.post');
 
 
-Route::get('/login', [AuthController::class, 'getLogin'])->name('login.get');
+Route::get('/', [AuthController::class, 'getLogin'])->name('login.get');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
 
 Route::get('/admin-pannel', [AuthController::class,'getAdminPannel'])->name('getAdminPannel.get');
@@ -42,6 +42,8 @@ Route::any('/add-roles', [WebAdminController::class, 'addRolesPost'])->name('add
 // Define routes for update and delete actions
 Route::get('/roles/{id}/update', 'RoleController@update')->name('updateRole');
 Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('deleteRole');
+
+Route::any('/user-details', [RoleController::class, 'viewRole'])->name('viewRole.get');
 
 
 // require __DIR__.'/auth.php';

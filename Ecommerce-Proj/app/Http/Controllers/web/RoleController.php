@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    /**
+     * get view page for individual user
+     */
+    public function viewRole(){
+        return view('admin.admin_viewPermission');
+    }
+
     // Method to show the form for updating a role
     public function update($id)
     {

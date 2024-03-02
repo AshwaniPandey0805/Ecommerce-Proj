@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone_number')->unique();
-            $table->unsignedBigInteger('role_id');
-            // $table->rememberToken();
+            $table->unsignedBigInteger('role');
             $table->timestamps();
+            $table->foreign('role')->references('id')->on('roles');
         });
     }
 
