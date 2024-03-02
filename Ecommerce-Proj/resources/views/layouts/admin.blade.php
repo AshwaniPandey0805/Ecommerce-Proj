@@ -64,6 +64,9 @@
                 <a class="nav-link" href="{{route('getUsers.get')}}">Users</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{route('addRoles.get')}}">Add Roles and Permissions</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">Products</a>
             </li>
             <li class="nav-item">

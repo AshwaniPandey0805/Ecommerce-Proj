@@ -34,5 +34,7 @@ Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::any('/users', [WebAdminController::class, 'getUsers'])->name('getUsers.get');
 
+Route::get('/add-roles',[WebAdminController::class, 'addRoles'])->name('addRoles.get');
+
 
 // require __DIR__.'/auth.php';
