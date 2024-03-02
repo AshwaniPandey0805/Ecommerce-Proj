@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\web\AdminController as WebAdminController;
 use App\Http\Controllers\web\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +30,9 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
 
 Route::get('/admin-pannel', [AuthController::class,'getAdminPannel'])->name('getAdminPannel.get');
 Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::any('/users', [WebAdminController::class, 'getUsers'])->name('getUsers.get');
 
 
 // require __DIR__.'/auth.php';
