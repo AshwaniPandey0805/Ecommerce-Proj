@@ -69,7 +69,7 @@
                             </div>
                         </form>
                         <div class="col-md-12 text-center mt-3">
-                            <p>If you already have an account, <a href="#">login here</a>.</p>
+                            <p>If you already have an account, <a href="{{route('login.get')}}">SIGN IN</a>.</p>
                         </div>
                     </div>
                 </div>
