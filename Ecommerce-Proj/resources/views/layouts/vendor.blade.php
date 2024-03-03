@@ -35,7 +35,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#">Admin Portal</a>
+        <a class="navbar-brand font-weight-bold " href="#">Vendor Portal</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,13 +43,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link font-weight-bold " href="#">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link font-weight-bold " href="{{route('getAdminPannel.get')}}">Admin DashBoard</a>
+                </li>
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{route('getVenderPage.get')}}">Vendor Dash Board</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('logout')}}">Logout</a>
+                    <a class="nav-link font-weight-bold " href="#">Logout</a>
                 </li>
             </ul>
         </div>
@@ -57,27 +60,26 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <ul class="nav flex-column">
+            
+            
             <li class="nav-item">
-                <a class="nav-link active" href="#">Dashboard</a>
+                <a class="nav-link fs-2 " href="#">All</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('getUsers.get')}}">Users</a>
+                <a class="nav-link font-weight-bold " href="#">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('addRoles.get')}}">Add Roles and Permissions</a>
+                <a class="nav-link font-weight-bold " href="#">Add Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Settings</a>
+                <a class="nav-link font-weight-bold " href="#">Settings</a>
             </li>
         </ul>
     </div>
 
     <!-- Main Content -->
     <div class="content">
-        @yield('admin-content')
+        @yield('vendor-content')
     </div>
 
     <!-- Bootstrap JS and dependencies -->

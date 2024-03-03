@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VendorController;
 use App\Http\Controllers\web\AdminController as WebAdminController;
 use App\Http\Controllers\web\AuthController;
 use App\Http\Controllers\web\RoleController;
+use App\Http\Controllers\web\VendorController as WebVendorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,3 +54,7 @@ Route::any('/add-user-role' , [WebAdminController::class, 'addUserPost'])->name(
 Route::delete('/users/{user}', [WebAdminController::class, 'deleteUser'])->name('deleteUser');
 
 // require __DIR__.'/auth.php';
+
+// Vender Section
+
+Route::get('/vendor-page', [WebVendorController::class, 'getVenderPage'])->name('getVenderPage.get');
