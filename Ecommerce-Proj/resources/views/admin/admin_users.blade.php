@@ -29,7 +29,7 @@
                         <td>{{ $user->email }}</td>
                         
                         <td>{{ $user->phone_number }}</td>
-                        <td>{{ $user->userRole->role_name }}</td>
+                        <td>{{ $user->userRoles->role_name }}</td>
                         <td>
                             <!-- Update Button -->
                             <form action="#" method="GET" class="d-inline">
@@ -37,7 +37,7 @@
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>
                             <!-- View Button -->
-                            <form action="{{route('viewRole.get')}}" method="POST" class="d-inline">
+                            <form action="{{ route('viewRole.get', $user->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 <button type="submit" class="btn btn-success">View</button>
                             </form>

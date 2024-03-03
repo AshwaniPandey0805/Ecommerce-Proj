@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Models\AssignPermission;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -11,8 +13,12 @@ class RoleController extends Controller
     /**
      * get view page for individual user
      */
-    public function viewRole(){
-        return view('admin.admin_viewPermission');
+    public function viewRole($id){
+        $permissions = AssignPermission::with('user')->get();
+        // dd($permissions);
+        
+        
+        return view('admin.admin_viewPermission',['permissions' => $permissions]);
     }
 
     // Method to show the form for updating a role

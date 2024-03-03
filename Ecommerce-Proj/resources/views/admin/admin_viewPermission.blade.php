@@ -16,13 +16,17 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($roles as $role)
+            @foreach ($permissions as $item)
                 <tr>
-                    <td>{{ $role->id }}</td>
-                    <td>{{ $role->role_id }}</td>
-                    <td>{{ $role->role_name }}</td>
+                    <td>{{ $item->user->id }}</td>
+                    <td>{{ $item->user->first_name }}</td>
+                    <td>{{ $item->user->last_name }}</td>
+                    <td>{{ $item->user->role }}</td>
+                    <td>{{ $item->permission_id }}</td>
+                    {{-- <td>{{ $role->role_id }}</td>
+                    <td>{{ $role->role_name }}</td> --}}
                 </tr>
-            @endforeach --}}
+            @endforeach
         </tbody>
     </table>
 @endsection

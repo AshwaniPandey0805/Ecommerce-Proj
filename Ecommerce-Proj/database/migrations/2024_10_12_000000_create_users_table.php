@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('phone_number')->unique();
             $table->unsignedBigInteger('role');
             $table->timestamps();
-            $table->foreign('role')->references('id')->on('roles');
+            $table->foreign('role')->references('role_id')->on('roles');
         });
     }
 

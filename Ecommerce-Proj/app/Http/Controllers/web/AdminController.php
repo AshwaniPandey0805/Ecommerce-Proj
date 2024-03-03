@@ -44,8 +44,8 @@ class AdminController extends Controller
         
         
 
-        $users = User::with('userRole')->get();
-        // dd($users[0]->userRole->role_name);
+        $users = User::with('userRoles')->get();
+        // dd($users[0]);
         // dd($users[0]->role->with('userRole')->get());
         return view('admin.admin_users', ['users' => $users]);
 
@@ -66,14 +66,14 @@ class AdminController extends Controller
     {
         // Validate the incoming request data
         $request->validate([
-            
+            'role_id' => 'required|unique',
             'role_name' => 'required',
             'permissions' => 'array', // Ensure permissions is an array
         ]);
 
         // Create a new role instance and save it to the database
         $role = Role::create([
-            
+            'role_id' => $request->role_id,
             'role_name' => $request->role_name,
         ]);
 
@@ -82,7 +82,7 @@ class AdminController extends Controller
             $permissions = $request->permissions;
             foreach ($permissions as $permission) {
                 AssignPermission::create([
-                    'role_id' => (int) $role->id, 
+                    'role_id' => (int) $role->role_id, 
                     'permission_id' => (int) $permission, 
                 ]);
             }

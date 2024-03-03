@@ -53,7 +53,7 @@ class AuthController extends Controller
         $data['email'] = $request->email;
         $data['phone_number'] = $request->phone_number;
         $data['password'] = Hash::make($request->password);
-        $data['role'] = 1;
+        $data['role'] = 101;
 
         
 

@@ -43,7 +43,7 @@ Route::any('/add-roles', [WebAdminController::class, 'addRolesPost'])->name('add
 Route::get('/roles/{id}/update', 'RoleController@update')->name('updateRole');
 Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('deleteRole');
 
-Route::any('/user-details', [RoleController::class, 'viewRole'])->name('viewRole.get');
+Route::post('/user-details/{id}', [RoleController::class, 'viewRole'])->name('viewRole.get');
 
 
 // require __DIR__.'/auth.php';
