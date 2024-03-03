@@ -69,7 +69,7 @@
                 <a class="nav-link font-weight-bold " href="#">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-weight-bold " href="#">Add Products</a>
+                <a class="nav-link font-weight-bold " href="{{route('addProduct.get')}}">Add Products</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link font-weight-bold " href="#">Settings</a>

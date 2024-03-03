@@ -58,3 +58,7 @@ Route::delete('/users/{user}', [WebAdminController::class, 'deleteUser'])->name(
 // Vender Section
 
 Route::get('/vendor-page', [WebVendorController::class, 'getVenderPage'])->name('getVenderPage.get');
+
+Route::any('/add-product', [WebVendorController::class, 'addProduct'])->name('addProduct.get');
+
+Route::any('/add-productDetails',[WebVendorController::class, 'addProductDetails'])->name('addProductDetails.get');
