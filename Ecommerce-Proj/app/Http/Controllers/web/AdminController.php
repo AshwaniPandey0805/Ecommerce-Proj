@@ -7,6 +7,7 @@ use App\Models\AssignPermission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -60,6 +61,48 @@ class AdminController extends Controller
     }
 
     /**
+     * admin add users -> GET METHOD
+     */
+    public function addUser(){
+        $roles = Role::all();
+        return view('admin.admin_addUser',['roles' => $roles]);
+    }
+
+    /**
+     * admin add users -> POST METHOD
+     */
+    public function addUserPost(Request $request){
+        $request->validate([
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'email' => 'required',
+            'phoneNumber' => 'required',
+            'password' => 'required',
+            'assignRole' => 'required'
+        ]);
+
+        $data['first_name'] = $request->firstName;
+        $data['last_name'] = $request->lastName;
+        $data['email'] = $request->email;
+        $data['phone_number'] = $request->phoneNumber;
+        $data['password'] = Hash::make($request->password);
+        $data['role'] = (int) $request->assignRole;
+
+        // dd($data);
+
+        // dd($data['role'] =(int) $request->assignRole);
+
+        $user = User::create($data);
+
+        if(!$user){
+            return redirect()->back()->with('error', "Invalid Details");
+        }
+
+        return redirect()->route('getUsers.get')->with('success', 'User Added successfully');
+
+
+    }
+    /**
      * add roles and permissions
      */
     public function addRolesPost(Request $request)
@@ -91,6 +134,16 @@ class AdminController extends Controller
         // Redirect back with success message
         return redirect()->back()->with('success', 'Role added successfully');
     }
+
+    /**
+     * delete User based on there id-> POST METHOD
+     */
+
+     public function deleteUser(User $user)
+     {
+         $user->delete();
+         return redirect()->back()->with('success', 'User deleted successfully');
+     }
 
 
     /**

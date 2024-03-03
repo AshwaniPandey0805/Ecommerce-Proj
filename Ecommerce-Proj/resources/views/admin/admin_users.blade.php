@@ -5,6 +5,10 @@
     <h3 class="text-white">User List</h3>
 </div>
 <div class="container">
+    <div class="mb-3">
+        <!-- Add User Button -->
+        <a href="{{route('addUser.get')}}" class="btn btn-primary">Add User</a>
+    </div>
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
             <thead>
@@ -13,11 +17,9 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
-                    
                     <th>Phone Number</th>
                     <th>Role ID</th>
                     <th>Actions</th>
-                    
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +29,6 @@
                         <td>{{ $user->first_name }}</td>
                         <td>{{ $user->last_name }}</td>
                         <td>{{ $user->email }}</td>
-                        
                         <td>{{ $user->phone_number }}</td>
                         <td>{{ $user->userRoles->role_name }}</td>
                         <td>
@@ -42,13 +43,12 @@
                                 <button type="submit" class="btn btn-success">View</button>
                             </form>
                             <!-- Delete Button -->
-                            <form action="#" method="POST" class="d-inline">
+                            <form action="{{ route('deleteUser', $user->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </td>
-                        
                     </tr>
                 @endforeach
             </tbody>

@@ -46,4 +46,9 @@ Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('deleteRo
 Route::post('/user-details/{id}', [RoleController::class, 'viewRole'])->name('viewRole.get');
 
 
+Route::any('/add-user', [WebAdminController::class, 'addUser'])->name('addUser.get');
+Route::any('/add-user-role' , [WebAdminController::class, 'addUserPost'])->name('addUser.post');
+
+Route::delete('/users/{user}', [WebAdminController::class, 'deleteUser'])->name('deleteUser');
+
 // require __DIR__.'/auth.php';
