@@ -6,25 +6,36 @@
         <h3 class="text-white">Add Products</h3>
     </div>
     
-    <div class="container mt-5">
-        {{-- <div class="form-group">
-            <label for="category">Category:</label>
-            <select class="form-control" id="category" name="category" required>
-                <option value="">Select Category</option>
-                <option value="1">Electronics</option>
-                <option value="2">Clothing</option>
-                <option value="3">Home</option>
-                <!-- Add more options as needed -->
-            </select>
-        </div> --}}
-        <form action="/submit-product" method="POST" enctype="multipart/form-data" class="mt-5" >
+    <div class="container p-5 mt-5">
+
+        <form action="{{route('addCategory.post')}}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="categoryName">Category Name:</label>
+                <input type="text" class="form-control" id="categoryName" name="categoryName" required>
+            </div>
+    
+    
+            <div class="form-group">
+                <label for="categoryID">Sub Category Of:</label>
+                <select class="form-control" id="categoryID" name="categoryID">
+                    <option value="">No Sub-Category</option>
+                    @foreach ($categories as $item)
+                        <option value="{{$item->id}}">{{$item->category_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div>
+                <input type="submit" value="Submit" class="btn btn-success">
+            </div>
+        </form>
+        
+        {{-- <form action="/submit-product" method="POST" enctype="multipart/form-data" class="mt-5" >
             @csrf
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="productName">Product Name:</label>
-                        <input type="text" class="form-control" id="productName" name="productName" required>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="skuNumber">SKU Number:</label>
                         <input type="text" class="form-control" id="skuNumber" name="skuNumber" required>
@@ -43,16 +54,7 @@
                         <label for="productID">Product ID:</label>
                         <input type="text" class="form-control" id="productID" name="productID" required>
                     </div>
-                    <div class="form-group">
-                        <label for="category">Category:</label>
-                        <select class="form-control" id="category" name="category" required disabled>
-                            <option value="">Select Category</option>
-                                <option value="1" {{ $selectedCategory == 1 ? 'selected' : '' }}>Electronics</option>
-                                <option value="2" {{ $selectedCategory == 2 ? 'selected' : '' }}>Clothing</option>
-                                <option value="3" {{ $selectedCategory == 3 ? 'selected' : '' }}>Home</option>
-                            <!-- Add more options as needed -->
-                        </select>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="category">Sub-Category:</label>
                         <select class="form-control" id="category" name="category" required>
@@ -86,6 +88,6 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
-        </form>
+        </form> --}}
     </div>
 @endsection

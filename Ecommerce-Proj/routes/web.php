@@ -61,4 +61,6 @@ Route::get('/vendor-page', [WebVendorController::class, 'getVenderPage'])->name(
 
 Route::any('/add-product', [WebVendorController::class, 'addProduct'])->name('addProduct.get');
 
-Route::any('/add-productDetails',[WebVendorController::class, 'addProductDetails'])->name('addProductDetails.get');
+Route::any('/add-productDetails',[WebVendorController::class, 'addProductDetails'])->name('addProductDetails.post');
+
+Route::post('/add-Category', [WebVendorController::class,'storeCategory'])->name('addCategory.post');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class VendorController extends Controller
@@ -18,20 +19,24 @@ class VendorController extends Controller
      * getting vendor, add product UI
      */
     public function addProduct(){
-        return view('vendor.vendor_addProducts');
+        $categories = ProductCategory::whereNull('category_id')->get();
+        return view('vendor.vendor_addProductDetials', compact('categories'));
     }
 
     /**
-     * getting catrgory
+     * creating category
      */
-    public function addProductDetails(Request $request){
-        $request->validate([
-            'category' => 'required',
-        ]);
+    public function storeCategory(Request $request){
+        $data = array(
+            'category_name' => $request->categoryName, 
+            'category_id' => $request->categoryID
+        );
 
-        $category =(int) $request->category;
-        // dd($category);
+        // dd($data);
 
-        return view('vendor.vendor_addProductDetials',['selectedCategory' => $category]);
+        $create = ProductCategory::create($data);
+
+        return redirect()->route('addProduct.get');
     }
+    
 }
