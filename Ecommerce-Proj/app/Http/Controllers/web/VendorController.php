@@ -19,8 +19,10 @@ class VendorController extends Controller
      * getting vendor, add product UI
      */
     public function addProduct(){
-        $categories = ProductCategory::whereNull('category_id')->get();
-        return view('vendor.vendor_addProductDetials', compact('categories'));
+        $categories = ProductCategory::where('category_id', 8)
+        ->orWhereNull('category_id')
+        ->get();
+        return view('vendor.vendor_categoryManagement', compact('categories'));
     }
 
     /**
@@ -38,5 +40,12 @@ class VendorController extends Controller
 
         return redirect()->route('addProduct.get');
     }
+
+    /**
+     * get addProduct pannel -> Get Method
+     */
+    // public function addProductItmes(){
+    //     return view('vendor.vendor_addProductPannel');
+    // }
     
 }

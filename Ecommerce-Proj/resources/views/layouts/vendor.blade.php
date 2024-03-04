@@ -66,11 +66,14 @@
                 <a class="nav-link fs-2 " href="#">All</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-weight-bold " href="#">Products</a>
+                <a class="nav-link font-weight-bold " href="{{route('getProducts.get')}}">Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-weight-bold " href="{{route('addProduct.get')}}">Add Products</a>
+                <a class="nav-link font-weight-bold " href="{{route('addProduct.get')}}">Product Management</a>
             </li>
+            {{-- <li class="nav-item">
+                <a class="nav-link font-weight-bold " href="{{route('addProductItmes.get')}}">Add Products</a>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link font-weight-bold " href="#">Settings</a>
             </li>

@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\web\AdminController as WebAdminController;
 use App\Http\Controllers\web\AuthController;
+use App\Http\Controllers\web\ProductManagerController;
 use App\Http\Controllers\web\RoleController;
 use App\Http\Controllers\web\VendorController as WebVendorController;
 use Illuminate\Support\Facades\Route;
@@ -64,3 +65,14 @@ Route::any('/add-product', [WebVendorController::class, 'addProduct'])->name('ad
 Route::any('/add-productDetails',[WebVendorController::class, 'addProductDetails'])->name('addProductDetails.post');
 
 Route::post('/add-Category', [WebVendorController::class,'storeCategory'])->name('addCategory.post');
+
+// Route::get('/add-product-details', [WebVendorController::class, 'addProductItmes'])->name('addProductItmes.get');
+
+
+
+
+
+/**
+ * product Manager Route
+ */
+Route::get('/product-manager', [ProductManagerController::class, 'getProductPannel'])->name('getProducts.get');
