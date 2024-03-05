@@ -79,7 +79,7 @@ class ProductManagerController extends Controller
 
         $imageData = [];
         if($files = $request->file('image')){
-            
+            // dd($files);
             foreach($files as $key => $file){
                 $extension = $file->getClientOriginalExtension();
                 $fileName = $key.'-'.time().'.'.$extension;
@@ -88,12 +88,14 @@ class ProductManagerController extends Controller
 
                 $file->move($path, $fileName);
 
-                $imageData = [
+                $imageData[] = [
                     'product_id' => $request->skuID,
                     'image_path' => $path.$fileName,
                 ];
             }
         }
+
+        // dd($imageData);
 
         /**
          * Creating product image table instance
@@ -108,8 +110,12 @@ class ProductManagerController extends Controller
     
         // dd($data);
         $productTable = ProductTable::create($data);
+        
+        foreach($imageData as $image){
+            $productImage = ProductImage::create($image);
+        }
 
-        $productImage = ProductImage::create($imageData);
+        
 
         if(!$productTable){
             return redirect()->route('getProducts.get')->with('error', 'invalid cradentials');
@@ -128,6 +134,16 @@ class ProductManagerController extends Controller
     public function getProductList(){
         $products = ProductTable::all();
         return view('vendor.vendor_productListPannel',compact('products'));
+    }
+
+    /**
+     * get Product details and image
+     */
+    public function getProductView($skuID){
+
+        $product = ProductTable::with('productImages')->where('sku_number', $skuID)->get();
+    // return $images->toArray();
+        return view('vendor.vendor_viewProducDetails', ['product' => $product[0]]);
     }
 
 }

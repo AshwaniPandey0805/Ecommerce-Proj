@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Product Image:</label>
-                                    <input type="file" class="form-control-file" id="image" name="image[]" multiples>
+                                    <input type="file" class="form-control-file" id="image" name="image[]" multiple>
                                 </div>
                             </div>
                             <div class="col-md-6">

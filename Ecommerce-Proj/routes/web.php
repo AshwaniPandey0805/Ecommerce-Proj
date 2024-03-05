@@ -9,6 +9,7 @@ use App\Http\Controllers\web\ProductManagerController;
 use App\Http\Controllers\web\RoleController;
 use App\Http\Controllers\web\VendorController as WebVendorController;
 use App\Models\ProductCategory;
+use App\Models\ProductTable;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -104,4 +105,20 @@ Route::any('/add-product-db', [ProductManagerController::class, 'addProductToDB'
  * get product list pannel
  */
 Route::get('/get-product-list', [ProductManagerController::class, 'getProductList'])->name('getProductList.get');
+
+/**
+ * view Product detils and photo
+ */
+
+Route::any('/get-product-image/{id}',[ProductManagerController::class, 'getProductView'])->name('getProductView.post');
+
+/**
+ * get Product image
+ * 
+ */
+Route::get('/product-image', function(){
+    $images = ProductTable::with('productImages')->where('sku_number', '123Vivo')->get();
+    // return $images->toArray();
+    dd($images->toArray());
+});
 

@@ -32,7 +32,7 @@
                 <td>{{ $product->discription }}</td>
                 <td>{{ $product->category }}</td>
                 <td>
-                    <a href="#" class="btn btn-primary">View</a>
+                    <a href="{{ route('getProductView.post', $product->sku_number) }}" class="btn btn-primary">View</a>
                     <a href="#" class="btn btn-success">Edit</a>
                     <form action="# " method="POST" style="display: inline;">
                         @csrf

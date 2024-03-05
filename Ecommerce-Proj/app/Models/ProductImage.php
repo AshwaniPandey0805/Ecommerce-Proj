@@ -14,4 +14,11 @@ class ProductImage extends Model
         'product_id',
         'image_path'
     ];
+
+    /**
+     * belong to one : Product Image -> Product Details
+     */
+    public function product(){
+        return $this->belongsTo(ProductTable::class,'product_id','sku_number');
+    }
 }

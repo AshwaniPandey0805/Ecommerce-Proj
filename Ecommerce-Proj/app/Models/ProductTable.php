@@ -25,10 +25,14 @@ class ProductTable extends Model
 
     
 
-    public function category()
-    {
-        return $this->belongsTo(ProductCategory::class, 'category_id', 'id');
+    /**
+     * one to many relation Product table -> Product image
+     */
+    public function productImages(){
+        return $this->hasMany(ProductImage::class,'product_id', 'sku_number');
     }
+
+
 
 
 }
