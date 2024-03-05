@@ -100,3 +100,8 @@ Route::get('/product-manager', [ProductManagerController::class, 'getProductPann
  */
 Route::any('/add-product-db', [ProductManagerController::class, 'addProductToDB'])->name('addProductsToDB.post');
 
+/**
+ * get product list pannel
+ */
+Route::get('/get-product-list', [ProductManagerController::class, 'getProductList'])->name('getProductList.get');
+

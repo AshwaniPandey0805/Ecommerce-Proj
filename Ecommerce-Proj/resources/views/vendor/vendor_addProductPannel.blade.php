@@ -4,10 +4,24 @@
     <div class="table-header text-center bg-primary py-2 mb-3 shadow-lg rounded-lg">
         <h3 class="text-white">Add Product</h3>
     </div>
-    @if(session('success'))
+    @if(session('success1'))
     <div class="alert alert-success">
-        {{ session('success') }}
+        {{ session('success1') }}
     </div>
+    @endif
+    @if(session('success2'))
+    <div class="alert alert-success">
+        {{ session('success2') }}
+    </div>
+    @endif
+
+    @if ($errors->any())
+        <ul class="alert alert-warning " >
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+        
     @endif
     {{-- {{dd($categories)}} --}}
     <div class="mt-5 p-4">
@@ -60,6 +74,10 @@
                                     <label for="costPrice">Cost Price:</label>
                                     <input type="number" class="form-control" id="costPrice" name="costPrice" required>
                                 </div>
+                                <div class="form-group">
+                                    <label for="image">Product Image:</label>
+                                    <input type="file" class="form-control-file" id="image" name="image[]" multiples>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -82,10 +100,7 @@
                                     <label for="dimensions">Dimensions (L x W x H in cm):</label>
                                     <input type="text" class="form-control" id="dimensions" name="dimensions">
                                 </div> --}}
-                                {{-- <div class="form-group">
-                                    <label for="image">Product Image:</label>
-                                    <input type="file" class="form-control-file" id="image" name="image">
-                                </div> --}}
+                               
                             </div>
                         </div>
                     </div>

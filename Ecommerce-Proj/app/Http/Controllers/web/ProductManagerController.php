@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
+use App\Models\ProductImage;
 use App\Models\ProductTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -61,7 +62,8 @@ class ProductManagerController extends Controller
             'quantity' => 'required',
             'manufacturer' => 'required',
             'weight' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'image' => 'required'
         ]);
     
         $data['product_name'] = $request->productNumber;
@@ -73,14 +75,59 @@ class ProductManagerController extends Controller
         $data['maufacture'] = $request->manufacturer;
         $data['discription'] = $request->description;
         $data['category'] = (int) $request->category_ID;
+
+
+        $imageData = [];
+        if($files = $request->file('image')){
+            
+            foreach($files as $key => $file){
+                $extension = $file->getClientOriginalExtension();
+                $fileName = $key.'-'.time().'.'.$extension;
+
+                $path = "uploade/products/";
+
+                $file->move($path, $fileName);
+
+                $imageData = [
+                    'product_id' => $request->skuID,
+                    'image_path' => $path.$fileName,
+                ];
+            }
+        }
+
+        /**
+         * Creating product image table instance
+         */
+        
+
+        // if(!$productImage){
+        //     return redirect()->back()->with('error', 'image not uploadede, something went wrong');
+        // }else(
+        //     ret
+        // )
     
         // dd($data);
         $productTable = ProductTable::create($data);
+
+        $productImage = ProductImage::create($imageData);
 
         if(!$productTable){
             return redirect()->route('getProducts.get')->with('error', 'invalid cradentials');
         }
 
-        return redirect()->back()->with('success', 'product added successfully');
+        return redirect()->back()->with([
+            'success1'=> 'product added successfully',
+            'success2' => 'image uploaded successsfully' 
+        ]);
     }
+
+
+    /**
+     * show product list to vendor
+     */
+    public function getProductList(){
+        $products = ProductTable::all();
+        return view('vendor.vendor_productListPannel',compact('products'));
+    }
+
 }

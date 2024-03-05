@@ -66,7 +66,7 @@
                 <a class="nav-link fs-2 " href="#">All</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-weight-bold " href="#">Products</a>
+                <a class="nav-link font-weight-bold " href="{{route('getProductList.get')}}">Products</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link font-weight-bold " href="{{route('addProduct.get')}}">Category Management</a>
