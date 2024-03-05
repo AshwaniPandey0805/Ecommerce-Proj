@@ -8,6 +8,7 @@ use App\Http\Controllers\web\AuthController;
 use App\Http\Controllers\web\ProductManagerController;
 use App\Http\Controllers\web\RoleController;
 use App\Http\Controllers\web\VendorController as WebVendorController;
+use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,6 +67,12 @@ Route::any('/add-productDetails',[WebVendorController::class, 'addProductDetails
 
 Route::post('/add-Category', [WebVendorController::class,'storeCategory'])->name('addCategory.post');
 
+Route::any('/add-product-details', [WebVendorController::class, 'addProductItem'])->name('addProuctItem.post');
+
+Route::any('/get-subCategory', [WebVendorController::class, 'getSubCategory'])->name('getSubCategory.post');
+
+Route::any('/get-category-id', [WebVendorController::class, 'getCategoryID'])->name('getCategoryID.post');
+
 // Route::get('/add-product-details', [WebVendorController::class, 'addProductItmes'])->name('addProductItmes.get');
 
 
@@ -76,3 +83,20 @@ Route::post('/add-Category', [WebVendorController::class,'storeCategory'])->name
  * product Manager Route
  */
 Route::get('/product-manager', [ProductManagerController::class, 'getProductPannel'])->name('getProducts.get');
+
+/**
+ * check category name
+ */
+
+//  Route::get('/get-category-names', function(){
+//     $categories = ProductCategory::where('category_id', 1)
+//     ->orWhereNull('category_id')
+//     ->get();
+//     dd($categories);
+//  } );
+
+/**
+ * add product to DB
+ */
+Route::any('/add-product-db', [ProductManagerController::class, 'addProductToDB'])->name('addProductsToDB.post');
+

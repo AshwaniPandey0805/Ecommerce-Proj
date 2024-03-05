@@ -29,8 +29,13 @@
                         </div>
                         
                     </form>
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                           <a href="{{route('addProuctItem.post')}}">Go to add product pannel</a>
+                        </div>
+                    </div>
                     <hr> <!-- Horizontal line -->
-                    <form action="/submit-product" method="POST" enctype="multipart/form-data">
+                    {{-- <form action="/submit-product" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="productNumber">Product Name:</label>
@@ -53,7 +58,7 @@
                                 <input type="submit" value="Submit" class="btn btn-primary font-weight-bold ">
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
                 </div>
             </div>
         </div>

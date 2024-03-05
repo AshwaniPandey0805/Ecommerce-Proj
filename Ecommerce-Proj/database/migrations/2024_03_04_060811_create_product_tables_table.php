@@ -17,10 +17,12 @@ return new class extends Migration
             $table->string('sku_number')->unique();
             $table->decimal('selling_price', 10, 2);
             $table->decimal('cost_price', 10, 2);
-            $table->string('product_id')->unique();
-            $table->unsignedBigInteger('category_id'); // Foreign key column
-            $table->foreign('category_id')->references('id')->on('product_categories')
-                ->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('quantity');
+            $table->string('maufacture');
+            $table->decimal('weight',10, 2);
+            $table->string('discription', 500);
+            $table->unsignedBigInteger('category'); // Foreign key column
+            $table->foreign('category')->references('id')->on('product_categories');
             $table->timestamps();
         });
     }

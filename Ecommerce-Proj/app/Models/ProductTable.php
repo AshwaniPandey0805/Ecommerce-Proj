@@ -10,15 +10,20 @@ class ProductTable extends Model
     use HasFactory;
     protected $table = 'product_tables';
 
-    protected $fillable = [
-        'product_name',
-        'sku_number',
-        'selling_price',
-        'cost_price',
-        'product_id',
-        'category_id',
+    
+        protected $fillable = [
+            'product_name',
+            'sku_number',
+            'selling_price',
+            'cost_price',
+            'quantity',
+            'weight',
+            'maufacture',
+            'discription',
+            'category', // Assuming 'category_id' is also a field in the table
+        ];
 
-    ];
+    
 
     public function category()
     {
