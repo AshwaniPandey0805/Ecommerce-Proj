@@ -4,7 +4,7 @@
 <div class="table-header text-center bg-primary py-2 mb-3 shadow-lg rounded-lg">
     <h3 class="text-white">Add User</h3>
 </div>
-<div class="row">
+<div class="row ">
     <div class="col-md-8">
         
         <div class="container mt-5">

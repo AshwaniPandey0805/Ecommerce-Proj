@@ -39,8 +39,8 @@
             </div>
         </div>
 
-        lorem*1000
         
+
     </div>
     
     

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\web\AdminController as WebAdminController;
 use App\Http\Controllers\web\AuthController;
@@ -121,4 +122,18 @@ Route::get('/product-image', function(){
     // return $images->toArray();
     dd($images->toArray());
 });
+
+
+
+
+/**
+ * User Routes
+ */
+
+Route::get('/user-dashboard', [UserController::class, 'getUserDashBoard'])->name('getUserDashBaord.get');
+
+/**
+ * get cart product
+ */
+Route::any('/cart-product', [UserController::class, 'getCartProduct'])->name('getCartProduct.get');
 
