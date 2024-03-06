@@ -33,7 +33,7 @@
 </head>
 
 <body>
-    <!-- Navbar -->
+   <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="#">Admin Portal</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -42,6 +42,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
+                <!-- Add user image here -->
+                <li class="nav-item">
+                    <img src="{{ asset('uploade/userImage/default_image.png') }}" alt="User Image" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover; margin-right: 10px;">
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home</a>
                 </li>

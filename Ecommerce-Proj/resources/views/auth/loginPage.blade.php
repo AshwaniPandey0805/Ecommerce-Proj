@@ -8,6 +8,16 @@
         {{ session('success') }}
     </div>
     @endif
+    @if(session('error'))
+    <div class="alert alert-success">
+        {{ session('error') }}
+    </div>
+    @endif
+    {{-- @if($errors->has('invalid_credentials'))
+    <div class="alert alert-danger">
+        {{ $errors->first('invalid_credentials') }}
+    </div>
+    @endif --}}
     {{-- main content --}}
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         {{-- login content --}}

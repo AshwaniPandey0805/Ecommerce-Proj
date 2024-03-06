@@ -33,7 +33,7 @@
                         <td>{{ $user->userRoles->role_name }}</td>
                         <td>
                             <!-- Update Button -->
-                            <form action="#" method="GET" class="d-inline">
+                            <form action="{{ route('updateUser.post', $user->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>

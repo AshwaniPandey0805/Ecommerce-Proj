@@ -37,7 +37,7 @@
                                 <a href="#" class="text-decoration-none text-white" style="width: 100%">Add To Cart</a>
                             </button>
                             <button type="button" class="btn btn-secondary"><a href="#" class="text-decoration-none text-white" style="width: 100%">Buy Now</a></button>
-                            <button type="button" class="btn btn-info" ><a href="#" class="text-decoration-none text-white" style="width: 100%">Add To Wish List</a></button>
+                            <button type="button" class="btn btn-info" ><a href="#" class="text-decoration-none text-white" style="width: 100%">Add To Wish Lisr</a></button>
                         </div>
                     </div>
                 </div>

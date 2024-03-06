@@ -19,8 +19,9 @@ class RegsiterUser extends Seeder
             "last_name" => "Sir",
             'email' => 'rajatSir007@codeBrew.org',
             'password' => Hash::make('@RajatSir007'),
-            'phone_number' => '1234567890',
-             'role_id' => 101,
+            'phone_number' => '1234567892',
+            'role' => 101,
+            'user_image_path' => 'product/userImage/default_image.png'
 
         ]);
     }

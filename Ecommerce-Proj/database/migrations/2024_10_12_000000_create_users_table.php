@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone_number')->unique();
             $table->unsignedBigInteger('role');
+            $table->string('user_image_path');
             $table->timestamps();
             $table->foreign('role')->references('role_id')->on('roles');
         });

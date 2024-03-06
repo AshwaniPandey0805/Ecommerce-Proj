@@ -21,7 +21,7 @@
                         <label for="role_name">Role Name:</label>
                         <input type="text" class="form-control" id="role_name" name="role_name" required>
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <h4>Assign Permissions:</h4>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="create" name="permissions[]" value="1">
@@ -36,7 +36,7 @@
                             <label class="form-check-label" for="delete">Delete</label>
                         </div>
                         <!-- Add more checkboxes for Permissions -->
-                    </div>
+                    </div> --}}
                     <button type="submit" class="btn btn-primary font-weight-bolder">Add Role</button>
                 </form>
             </div>
@@ -62,7 +62,7 @@
             <tbody>
                 @foreach ($roles as $role)
                     <tr>
-                        <td>{{ $role->id }}</td>
+                        <td>{{ $role->role_id }}</td>
                         <td>{{ $role->role_name }}</td>
                         <td>Create, Update, Delete, </td>
                         <td>

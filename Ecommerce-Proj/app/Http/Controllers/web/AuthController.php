@@ -15,6 +15,9 @@ class AuthController extends Controller
      * get register page -> GET method
      */
     public function getRegisterUser(){
+        if(Auth::check()){
+            return redirect()->route('getAdminPannel.get')->with('message', 'User is allready login');
+        }
         return view('auth.registerPage');
      }
 
@@ -22,6 +25,10 @@ class AuthController extends Controller
       * get login page -> GET method
       */
      public function getLogin(){
+        
+        if(Auth::check()){
+            return redirect()->route('getAdminPannel.get')->with('message', 'User is allready login');
+        }
         return view('auth.loginPage');
      }
 
@@ -31,6 +38,7 @@ class AuthController extends Controller
       public function getAdminPannel(){
 
         $users = User::all();
+        // dd($users);
         return view('admin.adminPage',['users' => $users]);
       }
 
@@ -85,11 +93,42 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only('email','password');
-
+        // dd($credentials);
         if(Auth::attempt($credentials)){
-            return redirect()->route('getAdminPannel.get')->with('success', 'login success');
+      
+            /**
+             * check login is admin having role_id - 101
+             */
+            if(auth()->user()->role == 101){
+            
+                /**
+                 * redirecting to admin dash board
+                 */
+                return redirect()->route('getAdminPannel.get')->with('success', 'login success');
+            }else if(auth()->user()->role == 103){
+
+                /**
+                 * redirecting to vendor dash board
+                 */
+                return redirect()->route('getVenderPage.get')->with('success', 'login success');            
+            
+            }else if(auth()->user()->role == 104){
+
+                /**
+                 * redirecting to user dash board
+                 */
+                return redirect()->route('getUserDashBaord.get')->with('success', 'login success');            
+            }else{
+
+                /**
+                 * flushing session
+                 */
+                \Session::flush();
+                return redirect()->route('login.get')->with('error', 'Invalid Credentials');
+            }
+            
         }else{
-            return redirect()->route('login.get')->with('error', 'Invalid credentials.');
+            return redirect()->route('login.get')->withErrors(['invalid credentials']);
         }
     }
 

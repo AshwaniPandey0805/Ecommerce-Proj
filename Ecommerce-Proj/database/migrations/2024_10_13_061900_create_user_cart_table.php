@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('user_carts', function (Blueprint $table) {
             $table->id();
+            $table->string('card_id')->unique();
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->enum('wish', ['1', '0'])->default('1');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
+
         });
     }
 

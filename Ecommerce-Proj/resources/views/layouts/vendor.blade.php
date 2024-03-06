@@ -55,7 +55,7 @@
                     <a class="nav-link" href="{{route('getVenderPage.get')}}">Vendor Dash Board</a>
                 </li> --}}
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold " href="#">Logout</a>
+                    <a class="nav-link font-weight-bold " href="{{route('logout')}}">Logout</a>
                 </li>
             </ul>
         </div>

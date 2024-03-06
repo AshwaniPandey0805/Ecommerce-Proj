@@ -16,35 +16,6 @@ class AdminController extends Controller
      */
         public function getUsers()
     {
-        // $users = User::where('role', 104)->get();
-
-        // $user = User::with('roles')->find(1);
-        // dd($user);
-
-        // $role = Role::find(4);
-        // $users = $role->users;
-        // dd($users);
-
-        // $user = User::with('role')->get();
-        // $roleName = $user[0]->role->role_name;
-        // dd($roleName);
-
-        // $users = User::with('role')->get();
-
-        // foreach ($users as $user) {
-        //     $roleName = $user->role->role_name;
-        //     dd($roleName);
-        // }
-
-        // foreach ($users as $user) {
-        //     $roleName = optional($user->role)->role_name;
-        //     dd($roleName);
-        // }
-        
-
-        
-        
-
         $users = User::with('userRoles')->get();
         // dd($users[0]);
         // dd($users[0]->role->with('userRole')->get());
@@ -78,7 +49,9 @@ class AdminController extends Controller
             'email' => 'required',
             'phoneNumber' => 'required',
             'password' => 'required',
-            'assignRole' => 'required'
+            'assignRole' => 'required',
+            'permissions' => 'array',
+            'image' => 'required'
         ]);
 
         $data['first_name'] = $request->firstName;
@@ -88,11 +61,44 @@ class AdminController extends Controller
         $data['password'] = Hash::make($request->password);
         $data['role'] = (int) $request->assignRole;
 
-        // dd($data);
+        $permissions = $request->permissions;
+        $files = $request->file('image');
+        
 
-        // dd($data['role'] =(int) $request->assignRole);
+        // If it's an array of files (multiple files uploaded)
+        if(is_array($files)) {
+            foreach ($files as $file) {
+                $extension = $file->getClientOriginalExtension();
+                $fileName = time().'.'.$extension;
+                $path = "uploads/userImage/";
+                $imagePath[] = $path.$fileName; // Store each file path in an array
+                $file->move($path, $fileName); // Move each file to the destination directory
+            }
+        } else {
+            // If it's a single file uploaded
+            $extension = $files->getClientOriginalExtension();
+            $fileName = time().'.'.$extension;
+            $path = "uploads/userImage/";
+            $imagePath = $path.$fileName;
+            $files->move($path, $fileName); // Move the file to the destination directory
+        }
 
+        
+        $data['user_image_path'] = $imagePath[0] ;
+
+        
         $user = User::create($data);
+
+         // Attach permissions to the role if checkboxes were selected
+         if ($request->has('permissions')) {
+            $permissions = $request->permissions;
+            foreach ($permissions as $permission) {
+                AssignPermission::create([
+                    'role_id' => (int) $request->assignRole, 
+                    'permission_id' => (int) $permission, 
+                ]);
+            }
+        }
 
         if(!$user){
             return redirect()->back()->with('error', "Invalid Details");
@@ -102,6 +108,7 @@ class AdminController extends Controller
 
 
     }
+    
     /**
      * add roles and permissions
      */
@@ -109,7 +116,7 @@ class AdminController extends Controller
     {
         // Validate the incoming request data
         $request->validate([
-            'role_id' => 'required|unique',
+            'role_id' => 'required|unique:roles,id',
             'role_name' => 'required',
             'permissions' => 'array', // Ensure permissions is an array
         ]);
@@ -147,7 +154,16 @@ class AdminController extends Controller
 
 
     /**
-     * check relation
+     * update user details method
      */
+    public function updateUserDetail($id){
+        $roles = Role::all();
+        $user = User::find($id);
+        // dd($user);
+        return view('admin.admin_updateUser', [
+            'users' => $user,
+            'roles' => $roles
+        ]);
+    }
     
 }

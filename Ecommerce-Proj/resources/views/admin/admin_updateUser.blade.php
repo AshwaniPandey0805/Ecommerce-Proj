@@ -1,8 +1,8 @@
 @extends('layouts.admin')
-@section('title', 'Add User')
+@section('title', 'Update user')
 @section('admin-content')
 <div class="table-header text-center bg-primary py-2 mb-3 shadow-lg rounded-lg">
-    <h3 class="text-white">Add User</h3>
+    <h3 class="text-white">Update User</h3>
 </div>
 <div class="row ">
     <div class="col-md-8">
@@ -15,20 +15,20 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" name="firstName" required>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" name="firstName" value="{{$users->first_name}}">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" name="lastName" required>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" name="lastName" value="{{$users->last_name}}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" required>
+                    <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" value="{{$users->email}}">
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number</label>
-                    <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter Phone Number" name="phoneNumber" required>
+                    <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter Phone Number" name="phoneNumber" value="{{$users->phone_number}}" >
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
