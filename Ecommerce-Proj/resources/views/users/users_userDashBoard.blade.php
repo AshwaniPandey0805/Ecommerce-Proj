@@ -4,6 +4,11 @@
 <div class="table-header text-center bg-primary py-2 mb-3 shadow-lg rounded-lg">
     <h3 class="text-white">Product Detail</h3>
 </div>
+@if (session('success'))
+    <div class="alert alert-success" >
+        {{session('success')}}
+    </div>
+@endif
 
 <div class="container mt-5">
     <div class="row">
@@ -34,9 +39,11 @@
                         <!-- Action buttons -->
                         <div class="mt-3">
                             <button type="button" class="btn btn-primary">
-                                <a href="#" class="text-decoration-none text-white" style="width: 100%">Add To Cart</a>
+                                <a href="{{route('addToCartItem.post', $item->sku_number)}}" class="text-decoration-none text-white" style="width: 100%">Add To Cart</a>
                             </button>
+
                             <button type="button" class="btn btn-secondary"><a href="#" class="text-decoration-none text-white" style="width: 100%">Buy Now</a></button>
+
                             <button type="button" class="btn btn-info" ><a href="#" class="text-decoration-none text-white" style="width: 100%">Add To Wish Lisr</a></button>
                         </div>
                     </div>

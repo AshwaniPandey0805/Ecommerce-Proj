@@ -23,7 +23,7 @@
 
         /* Main Content Styles */
         .content {
-            margin-left: 250px; /* Same as sidebar width */
+            margin-left: 250px; 
             padding: 20px;
         }
     </style>
@@ -62,7 +62,7 @@
                 <a class="nav-link fs-2 " href="#">All</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-weight-bold " href="#">Products</a>
+                <a class="nav-link font-weight-bold " href="{{route('getUserDashBaord.get')}}">Products</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link font-weight-bold " href="#">Select Categories</a>
@@ -84,6 +84,7 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th scope="col">Image</th>
                                 <th scope="col">Product</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Quantity</th>
@@ -94,6 +95,7 @@
                         <tbody>
                             <!-- Cart items will be dynamically added here -->
                             <tr>
+                                <td><img src="path/to/product/image.jpg" alt="Product Image" style="width: 100px;"></td>
                                 <td>Product Name</td>
                                 <td>$50.00</td>
                                 <td>2</td>

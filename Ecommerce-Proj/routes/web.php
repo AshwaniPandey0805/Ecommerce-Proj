@@ -174,12 +174,17 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
     /**
      * User Portal : Route to get user dashboard
      */
-    Route::get('/user-dashboard', [UserController::class, 'getUserDashBoard'])->name('getUserDashBaord.get');
+    Route::any('/user-dashboard', [UserController::class, 'getUserDashBoard'])->name('getUserDashBaord.get');
 
     /**
      * get cart product
      */
     Route::any('/cart-product', [UserController::class, 'getCartProduct'])->name('getCartProduct.get');
+
+    /**
+     * User Portal : Route to add to card method
+     */
+    Route::any('/add-to-cart/{id}', [UserController::class, 'addToCartItem'])->name('addToCartItem.post');
 
   });
 
