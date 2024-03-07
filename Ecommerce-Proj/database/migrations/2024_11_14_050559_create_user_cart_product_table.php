@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('cart_id');
             $table->string('product_id');
-            $table->integer('wish_list')->default(0)->comment('1 or added, 0 for null ');
+            $table->integer('wish_list')->default(0)->comment('1 -> added, 0 -> not_added ' )->nullable();
             $table->integer('qunatity');
             $table->timestamps();
             $table->foreign('cart_id')->references('card_id')->on('user_carts')->onDelete('cascade');
