@@ -186,6 +186,16 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
      */
     Route::any('/add-to-cart/{id}', [UserController::class, 'addToCartItem'])->name('addToCartItem.post');
 
+    /**
+     * User Portal : Route to handle increment and decrement of card prduct quantity
+     */
+    Route::any('/handleQuantity/{product_id}/{type}',[UserController::class,'handleQuantity'])->name('handleQuantity');
+
+    /**
+     * 
+     */
+    Route::delete('/remove-from-cart/{product_id}', [UserController::class, 'removeFromCart'])->name('removeFromCart');
+
   });
 
 

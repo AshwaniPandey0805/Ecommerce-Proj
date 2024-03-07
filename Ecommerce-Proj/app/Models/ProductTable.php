@@ -32,6 +32,13 @@ class ProductTable extends Model
         return $this->hasMany(ProductImage::class,'product_id', 'sku_number');
     }
 
+    /**
+     * belong to relation in within UserCartProduct - ProductTabel
+     */
+    public function userCartProduct(){
+        return $this->belongsTo(UserCartProduct::class, 'product_id', 'sku_number');
+    }
+
 
 
 

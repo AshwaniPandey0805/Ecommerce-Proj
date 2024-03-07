@@ -23,7 +23,25 @@ class UserController extends Controller
      * get cart product page
      */
     public function getCartProduct(){
-        return view('users.users_addTocartPannel');
+        $userCartProduct = UserCartProduct::with('productWithImages')->get();
+        // dd($userCartProduct[0]->productWithImages->selling_price);
+        $subTotal = 0;
+        $taxRate = 0.1; // 10% tax rate, you can adjust this as needed
+        $totalTax = 0;
+        $total = 0;
+        foreach($userCartProduct as $item) {
+            $subTotal += ($item->productWithImages->selling_price) * ($item->qunatity);
+        }
+        
+        // Calculate tax
+        $totalTax = $subTotal * $taxRate;
+        
+        // dd($subTotal);
+        // Calculate total
+        $total = $subTotal + $totalTax;
+        // dd($subTotal);
+        
+        return view('users.users_addTocartPannel' , compact('userCartProduct', 'subTotal', 'total'));
     }
 
     /**
@@ -70,11 +88,11 @@ class UserController extends Controller
             /**
              * adding card ID and user in in User cart db
              */
-            UserCart::create([
-                'card_id' => $cartItem[0]->sku_number,
-                'user_id' => $userID,
-                'wish' => '0'
-            ]);
+            // UserCart::create([
+            //     'card_id' => $cartItem[0]->sku_number,
+            //     'user_id' => $userID,
+            //     'wish' => '0'
+            // ]);
 
             /**
              * getting card ID from user_cart DB
@@ -93,5 +111,46 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'item added to user card table');
         
 
+    }
+
+    /**
+     * 
+     */
+    public function handleQuantity($product_id,$type){
+        switch($type){
+            case '-':
+                    $cart=UserCartProduct::where('product_id',$product_id)->first();
+                    if($cart->qunatity >1){
+                        $cart->qunatity -=1;
+                        $cart->save();
+                        return back();
+                    }
+                    return back();
+            case '+':
+                    $cart=UserCartProduct::where('product_id',$product_id)->first();
+                    if($cart->qunatity <5){
+                        $cart->qunatity +=1;
+                        $cart->save();
+                        return back();
+                    }
+                    return back();
+        }
+    }
+
+    /**
+     * 
+     */
+    // Find the item in the cart
+    public function removeFromCart($product_id)
+    {
+        // Find the item in the cart
+        $cartItem = UserCartProduct::where('product_id', $product_id)->first();
+
+        // Remove the item from the cart
+        if ($cartItem) {
+            $cartItem->delete();
+        }
+
+        return redirect()->back()->with('success', 'Item removed from cart successfully.');
     }
 }
