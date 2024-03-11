@@ -201,6 +201,7 @@ class UserController extends Controller
          * Store product related to order ID
          */ 
 
+        
         foreach($userCartProduct as $product){
             $OrderedProduct = OrderedProducts::create([
                 'order_id' =>  $order->id,
@@ -217,5 +218,13 @@ class UserController extends Controller
         return view('users.user_placeOrderPage', compact('userCartProduct', 'subTotal', 'total', 'order'));
 
 
+    }
+
+
+    /**
+     * Proceed to payment method
+     */
+    public function proceedToPayment(){
+        return view('users.user>payToProceed');
     }
 }

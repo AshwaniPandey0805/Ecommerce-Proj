@@ -3,7 +3,9 @@
 @section('user-content')
 <div class="container">
     <h2 class="mt-4">Place Order</h2>
-    <form action="/submit_order" method="post">
+    <form action="{{route('checkout.post')}}" method="post">
+        @csrf
+
         <div class="row">
             
             <div class="col-md-6">
@@ -55,7 +57,7 @@
                         
                     </div>
                 </div>
-                <div class="mt-5">
+                {{-- <div class="mt-5">
                     <h3 class="text-center">Payment Method:</h3> <!-- Center-aligned heading -->
                     <div class="form-group">
                         <div class="form-check">
@@ -75,8 +77,8 @@
                             <label class="form-check-label" for="paypal">PayPal</label>
                         </div>
                     </div>
-                </div>
-                <div class="form-group text-center"> <!-- Added "text-center" class to center-align content -->
+                </div> --}}
+                <div class="form-group text-center mt-5"> <!-- Added "text-center" class to center-align content -->
                     <input type="submit" value="Place Order" class="btn btn-primary">
                 </div>
             </div>
@@ -101,4 +103,5 @@
         
     </form>
 </div>
+
 @endsection

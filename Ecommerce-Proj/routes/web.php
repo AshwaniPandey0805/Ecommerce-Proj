@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StripePaymentController as ControllersStripePaymentController;
+use App\Http\Controllers\web\StripePaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\web\AdminController as WebAdminController;
@@ -201,7 +203,26 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
      */
     Route::any('/place-order/{userID}', [UserController::class, 'placeOrder'])->name('placeOrder.post');
 
+    /**
+     * User Portal : Route to proceed to paymant 
+     * 
+     */
+    Route::any('/payment', [UserController::class, 'proceedToPayment'])->name('proceedToPayment.post');
+
+
+    /**
+     * User Portal : Payment GateWay Route
+     */
+    
+  
+
   });
+
+//   Route::controller(ControllersStripePaymentController::class)->group(function(){
+//    Route::get('stripe', 'stripe');
+//    Route::post('stripe', 'stripePost')->name('stripe.post');
+// });
+
 
 
 
@@ -210,6 +231,11 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
  * Admin : logout Route
  */
 Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/checkOut', [StripePaymentController::class, 'checkout']);
+Route::post('/checkOut-post', [StripePaymentController::class, 'checkout'])->name('checkout.post');
+Route::post('/success', [StripePaymentController::class, 'success'])->name('seccess.post');
+Route::post('/cancel', [StripePaymentController::class, 'cancel'])->name('cancel.post');
 
 
 
