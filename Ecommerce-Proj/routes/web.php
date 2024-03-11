@@ -196,6 +196,11 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
      */
     Route::delete('/remove-from-cart/{product_id}', [UserController::class, 'removeFromCart'])->name('removeFromCart');
 
+    /**
+     * User Portal : Route to Place order
+     */
+    Route::any('/place-order', [UserController::class, 'placeOrder'])->name('placeOrder.post');
+
   });
 
 

@@ -153,4 +153,29 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Item removed from cart successfully.');
     }
+
+    /**
+     * method to place order
+     */
+    public function placeOrder(Request $request){
+
+        $userCartProduct = UserCartProduct::with('productWithImages')->get();
+        // dd($userCartProduct[0]->productWithImages->selling_price);
+        $subTotal = 0;
+        $taxRate = 0.1; // 10% tax rate, you can adjust this as needed
+        $totalTax = 0;
+        $total = 0;
+        foreach($userCartProduct as $item) {
+            $subTotal += ($item->productWithImages->selling_price) * ($item->qunatity);
+        }
+        
+        // Calculate tax
+        $totalTax = $subTotal * $taxRate;
+        
+        // dd($subTotal);
+        // Calculate total
+        $total = $subTotal + $totalTax;
+        // dd($subTotal);
+        return view('users.user_placeOrderPage', compact('userCartProduct', 'subTotal', 'total'));
+    }
 }

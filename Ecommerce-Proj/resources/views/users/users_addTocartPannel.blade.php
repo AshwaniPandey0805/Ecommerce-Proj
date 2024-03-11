@@ -165,7 +165,10 @@
                                 <span>₹ {{$total}}.00</span>
                             </li>
                         </ul>
-                        <button class="btn btn-primary btn-block mt-3">Proceed to Checkout</button>
+                        <a href="{{route('placeOrder.post')}}" class="text-decoration-none ">
+                            <button class="btn btn-primary btn-block mt-3 font-weight-bold  ">Proceed to Checkout</button>
+                        </a>
+                        
                     </div>
                 </div>
             </div>
