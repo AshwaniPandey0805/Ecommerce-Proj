@@ -96,23 +96,7 @@
                 {{-- <h3>Order Total: $[Total amount]</h3> --}}
                 
             </div>
-            {{-- <div class="col-md-6">
-                <h3>Payment Method:</h3>
-                <div class="form-group">
-                    <label>
-                        <input type="radio" name="payment_method" value="online" required> Online Payment
-                    </label>
-                    <label>
-                        <input type="radio" name="payment_method" value="cod"> Cash on Delivery
-                    </label>
-                    <label>
-                        <input type="radio" name="payment_method" value="credit_card"> Credit Card
-                    </label>
-                    <label>
-                        <input type="radio" name="payment_method" value="paypal"> PayPal
-                    </label>
-                </div>
-            </div> --}}
+           
         </div>
         
     </form>

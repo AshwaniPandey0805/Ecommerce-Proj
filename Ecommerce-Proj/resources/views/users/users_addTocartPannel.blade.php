@@ -165,7 +165,10 @@
                                 <span>₹ {{$total}}.00</span>
                             </li>
                         </ul>
-                        <a href="{{route('placeOrder.post')}}" class="text-decoration-none ">
+                        @php
+                            $userID = auth()->user()->id;
+                        @endphp
+                        <a href="{{route('placeOrder.post',['userID' => $userID])}}" class="text-decoration-none ">
                             <button class="btn btn-primary btn-block mt-3 font-weight-bold  ">Proceed to Checkout</button>
                         </a>
                         

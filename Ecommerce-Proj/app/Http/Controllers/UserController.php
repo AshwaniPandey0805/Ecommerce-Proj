@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderedProducts;
+use App\Models\OrderProduct;
+use App\Models\OrderTable;
 use App\Models\ProductTable;
 use App\Models\UserCart;
 use App\Models\UserCartProduct;
@@ -157,10 +160,16 @@ class UserController extends Controller
     /**
      * method to place order
      */
-    public function placeOrder(Request $request){
+    public function placeOrder($userID){
+
+        // dd($userID);
+
+
+
+
 
         $userCartProduct = UserCartProduct::with('productWithImages')->get();
-        // dd($userCartProduct[0]->productWithImages->selling_price);
+        // dd($userCartProduct[0]->productWithImages->selling_price)
         $subTotal = 0;
         $taxRate = 0.1; // 10% tax rate, you can adjust this as needed
         $totalTax = 0;
@@ -169,13 +178,44 @@ class UserController extends Controller
             $subTotal += ($item->productWithImages->selling_price) * ($item->qunatity);
         }
         
-        // Calculate tax
         $totalTax = $subTotal * $taxRate;
-        
-        // dd($subTotal);
-        // Calculate total
         $total = $subTotal + $totalTax;
-        // dd($subTotal);
-        return view('users.user_placeOrderPage', compact('userCartProduct', 'subTotal', 'total'));
+
+        // dd($userCartProduct[0]->product_id);
+        // dd($userCartProduct->product_id);
+
+
+        /**
+         * Store order  details in OrderTable Model
+         */
+
+
+        
+        $order = OrderTable::create([
+            'customer_id' => $userID,
+            'total_amount' => $total,
+            'tax' => 0.10,
+        ]);
+
+        /**
+         * Store product related to order ID
+         */ 
+
+        foreach($userCartProduct as $product){
+            $OrderedProduct = OrderedProducts::create([
+                'order_id' =>  $order->id,
+                'product_id' => $product->product_id,
+                'quantity' => $product->qunatity
+             ]);
+
+        }
+         
+
+        
+
+
+        return view('users.user_placeOrderPage', compact('userCartProduct', 'subTotal', 'total', 'order'));
+
+
     }
 }

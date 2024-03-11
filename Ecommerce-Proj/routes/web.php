@@ -199,7 +199,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
     /**
      * User Portal : Route to Place order
      */
-    Route::any('/place-order', [UserController::class, 'placeOrder'])->name('placeOrder.post');
+    Route::any('/place-order/{userID}', [UserController::class, 'placeOrder'])->name('placeOrder.post');
 
   });
 
