@@ -45,12 +45,12 @@
                 <li class="nav-item">
                     <a class="nav-link font-weight-bold " href="#">Home</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link font-weight-bold " href="{{route('getAdminPannel.get')}}">Admin DashBoard</a>
-                </li>
-                <li class="nav-item">
+                </li> --}}
+                {{-- <li class="nav-item">
                     <a class="nav-link font-weight-bold " href="{{route('getUserDashBaord.get')}}">User DashBoard</a>
-                </li>
+                </li> --}}
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="{{route('getVenderPage.get')}}">Vendor Dash Board</a>
                 </li> --}}

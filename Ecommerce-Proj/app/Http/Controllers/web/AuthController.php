@@ -141,4 +141,12 @@ class AuthController extends Controller
 
         return redirect()->route('login.get')-> with('succcess', 'Logout Successfully');
     }
+
+
+    /**
+     * 
+     */
+    public function checkLoginDetails(){
+        dd(auth()->user()->role);
+    }
 }

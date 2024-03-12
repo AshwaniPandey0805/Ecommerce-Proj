@@ -13,6 +13,7 @@ use App\Http\Controllers\web\RoleController;
 use App\Http\Controllers\web\VendorController as WebVendorController;
 use App\Models\ProductCategory;
 use App\Models\ProductTable;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,7 +34,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
  * adding middleware to for admin portal (Auth Middleware)
  */
 
- Route::group(['middleware' => 'auth'], function(){
+ Route::middleware([ 'auth' ,'authUser'])->group(function(){
 
     /**
      * Admin Portal  :  Route to get admin pannel dashboard
@@ -91,7 +92,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
     Route::any('/update/{userID}', [WebAdminController::class, 'updateUserDetail'])->name('updateUser.post');
 
 
- });
+ })->middleware('authCheck');
 
 
 
@@ -104,7 +105,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
  * Vendor Route Middleware
  */
 
- Route::group(['middleware' => 'auth'], function(){
+ Route::middleware(['auth', 'authVendor'])->group(function(){
     /**
      * Vendor Portal : Route to show vendor dash board
      */
@@ -236,6 +237,12 @@ Route::get('/checkOut', [StripePaymentController::class, 'checkout']);
 Route::post('/checkOut-post', [StripePaymentController::class, 'checkout'])->name('checkout.post');
 Route::post('/success', [StripePaymentController::class, 'success'])->name('seccess.post');
 Route::post('/cancel', [StripePaymentController::class, 'cancel'])->name('cancel.post');
+
+
+/**
+ * demo route
+ */
+Route::get('/check', [AuthController::class, 'checkLoginDetails']);
 
 
 
