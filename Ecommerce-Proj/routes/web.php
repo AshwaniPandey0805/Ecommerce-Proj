@@ -224,6 +224,9 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
 //    Route::post('stripe', 'stripePost')->name('stripe.post');
 // });
 
+// Route::get('/success', [StripePaymentController::class, 'success'])->name('checkout.success');
+// Route::get('/c', [StripePaymentController::class, 'success'])->name('checkout.success');
+
 
 
 
@@ -234,9 +237,9 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
 Route::any('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/checkOut', [StripePaymentController::class, 'checkout']);
-Route::post('/checkOut-post', [StripePaymentController::class, 'checkout'])->name('checkout.post');
-Route::post('/success', [StripePaymentController::class, 'success'])->name('seccess.post');
-Route::post('/cancel', [StripePaymentController::class, 'cancel'])->name('cancel.post');
+Route::post('/checkOut-post/{orderID}', [StripePaymentController::class, 'checkout'])->name('checkout.post');
+Route::get('/success', [StripePaymentController::class, 'success'])->name('success.post');
+Route::get('/cancel', [StripePaymentController::class, 'cancel'])->name('cancel.post');
 
 
 /**

@@ -15,7 +15,8 @@ class OrderTable extends Model
         'customer_id',
         'order_date',   
         'total_amount',
-        'tax'
+        'tax',
+        'status'
 
     ];
 }

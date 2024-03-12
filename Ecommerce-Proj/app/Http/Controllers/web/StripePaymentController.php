@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrderTable;
 use App\Models\UserCartProduct;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StripePaymentController extends Controller
 {
     /**
      * check Out method
      */
-    public function checkout(){
+    public function checkout($orderID){
+        // dd($orderID);
+        // $orderID = ;
+        // dd($orderID->id);
         
-
        
        
        $userCartProduct = UserCartProduct::with('productWithImages')->get();
@@ -44,6 +48,7 @@ class StripePaymentController extends Controller
                         'unit_amount' => $product->productWithImages->cost_price * 100,
                     ],
                     'quantity' => $product->qunatity ,
+                    
                 ];
 
             
@@ -55,8 +60,11 @@ class StripePaymentController extends Controller
 
         $session = \Stripe\checkout\Session::create([
             'line_items' => $lineItem,
+            'metadata' => [
+                'order_id' => $orderID, // Include the order ID as metadata
+            ],
             'mode' => 'payment',
-            'success_url' => route('seccess.post', [], true),
+            'success_url' => route('success.post', [], true).'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('cancel.post' , [] ,  true),
 
             ]);
@@ -69,8 +77,46 @@ class StripePaymentController extends Controller
     /**
      * success url
      */
-    public function success(){
+    public function success(Request $request)
+    {
+        \Stripe\Stripe::setApiKey('sk_test_51Ot5PyI8VivPSPAdUgqrtMcy6N4zERlHyJgo49T74UDdqensyPAHHmzQYcB0AI7tSU80zhvSyp6DmfKJBAC9LveM00DCzOQiZz');
 
+        $sessionId = $request->get('session_id');
+        if (!$sessionId) {
+            throw new NotFoundHttpException('Session ID is missing');
+        }
+
+        try {
+            $session = \Stripe\Checkout\Session::retrieve($sessionId);
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            // Handle Stripe API errors, such as invalid session ID
+            return response()->json(['error' => 'Invalid session ID'], 400);
+        }
+
+        if (!$session) {
+            // Return a response indicating that the session was not found
+            return response()->json(['error' => 'Session not found'], 404);
+        }
+
+         // Retrieve order ID from metadata
+        $orderId = $session->metadata['order_id'] ?? null;
+        // dd($orderId);
+        $order = OrderTable::find($orderId);
+        // dd($order);
+
+        if ($order) 
+        {   
+            
+            // Update order status to 'paid' (assuming '1' represents 'paid')
+            $order->update(['status'=>'success']);
+            $order->save();
+            dd($order);
+        } else {
+            // Handle the case where the order is not found
+            return response()->json(['error' => 'Order not found'], 404);
+        }
+
+        return view('users.user_stripeSuccess', compact('session', 'order'));
     }
 
     /**

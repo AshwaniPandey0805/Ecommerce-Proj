@@ -1,9 +1,10 @@
 @extends('layouts.user')
 @section('title', 'Place Order')
 @section('user-content')
+{{-- {{dd($order)}} --}}
 <div class="container">
     <h2 class="mt-4">Place Order</h2>
-    <form action="{{route('checkout.post')}}" method="post">
+    <form action="{{route('checkout.post',['orderID' => $order->id ])}}" method="post">
         @csrf
 
         <div class="row">
