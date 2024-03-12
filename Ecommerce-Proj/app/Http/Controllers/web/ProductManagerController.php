@@ -8,9 +8,11 @@ use App\Models\ProductImage;
 use App\Models\ProductTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use App\Traits\SkuNumber;
 
 class ProductManagerController extends Controller
 {
+   
     /**
      * get product page
      */
@@ -43,20 +45,14 @@ class ProductManagerController extends Controller
     }
 
     /**
-     * get Product detils
-     */
-    public function getProductDetails(Request $request){
-        dd("view Product detils");
-    }
-
-    /**
      * add product to db
      */
+    use SkuNumber;
     public function addProductToDB(Request $request){
         $request->validate([
             'category_ID' => 'required',
             'productNumber' => 'required',
-            'skuID' => 'required',
+            // 'skuID' => 'required',
             'sellingPrice' => 'required',
             'costPrice' => 'required',
             'quantity' => 'required',
@@ -67,7 +63,7 @@ class ProductManagerController extends Controller
         ]);
     
         $data['product_name'] = $request->productNumber;
-        $data['sku_number'] = $request->skuID;
+        
         $data['selling_price'] = $request->sellingPrice;
         $data['cost_price'] = $request->costPrice;
         $data['quantity'] = $request->quantity;
@@ -76,6 +72,12 @@ class ProductManagerController extends Controller
         $data['discription'] = $request->description;
         $data['category'] = (int) $request->category_ID;
 
+        /**
+         * Using tarit to create SKU ID
+         */
+        $sku_ID = $this->generateSkuId($request->productNumber);
+        // dd($sku_ID); // Dump and die to inspect the generated SKU ID
+        $data['sku_number'] = $sku_ID; // Assign the generated SKU ID to $data['sku_number']
 
         $imageData = [];
         if($files = $request->file('image')){
@@ -89,7 +91,7 @@ class ProductManagerController extends Controller
                 $file->move($path, $fileName);
 
                 $imageData[] = [
-                    'product_id' => $request->skuID,
+                    'product_id' => $sku_ID,
                     'image_path' => $path.$fileName,
                 ];
             }

@@ -44,12 +44,15 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-        'authUser' => [
+        'authAdmin' => [
             \App\Http\Middleware\AuthCheckMiddleware::class,
             
         ],
         'authVendor' => [
             \App\Http\Middleware\VendorAuthMiddleware::class,
+        ],
+        'authUser' => [
+            \App\Http\Middleware\UserAuthMiddleware::class,
         ]
     ];
 

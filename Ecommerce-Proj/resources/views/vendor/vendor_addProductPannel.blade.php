@@ -62,10 +62,10 @@
                                     <label for="productNumber">Product Name:</label>
                                     <input type="text" class="form-control" id="productNumber" name="productNumber" required>
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="skuID">SKU ID:</label>
                                     <input type="text" class="form-control" id="skuID" name="skuID" required>
-                                </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <label for="sellingPrice">Selling Price:</label>
                                     <input type="number" class="form-control" id="sellingPrice" name="sellingPrice" required>

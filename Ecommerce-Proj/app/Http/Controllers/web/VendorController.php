@@ -56,22 +56,11 @@ class VendorController extends Controller
      * get sub categories
      */
     public function getSubCategory(Request $request){
-
-        // $categories = ProductCategory::where('category_id', 8)
-        // // ->orWhereNull('category_id')
-        // ->get();
-
+        
         $SubCategories = ProductCategory::where('category_id', $request->id)
         ->get();
 
-        // return view('vendor.vendor_addProductPannel', [
-        //     'categories' => $categories,
-        //     'subCategories' => $SubCategories,
-        // ]);
-
         return response()->json($SubCategories);
-        
-
     }
 
     /**

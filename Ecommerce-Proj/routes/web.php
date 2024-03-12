@@ -34,7 +34,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
  * adding middleware to for admin portal (Auth Middleware)
  */
 
- Route::middleware([ 'auth' ,'authUser'])->group(function(){
+ Route::middleware([ 'auth' ,'authAdmin'])->group(function(){
 
     /**
      * Admin Portal  :  Route to get admin pannel dashboard
@@ -172,7 +172,7 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
  /**
   * User Portal : Route to handle auth middleware for User protal
   */
-  Route::group(['middleware'=>'auth'], function(){
+  Route::middleware(['auth', 'authUser'])->group(function(){
 
     /**
      * User Portal : Route to get user dashboard
